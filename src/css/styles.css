@@ -79,6 +79,98 @@ h1 span { color: var(--accent); }
   border-radius: 999px; padding: 6px 14px;
 }
 
+/* ── Info Panel ─────────────────────────────────────────────────────────── */
+.info-panel {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-how {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+
+.info-how-title {
+  font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.info-steps {
+  display: flex; gap: 0; flex-wrap: wrap;
+  counter-reset: step;
+}
+
+.info-step {
+  display: flex; align-items: flex-start; gap: 12px;
+  flex: 1 1 220px;
+  padding: 0 20px 0 0;
+}
+.info-step:last-child { padding-right: 0; }
+
+.info-step-num {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--accent-dim); color: var(--accent);
+  font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+.info-step-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.info-step-text strong { color: var(--text); font-weight: 700; }
+
+.info-formats {
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.info-formats-label { font-size: 11px; color: var(--text3); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.info-fmt-tag {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 3px 10px; color: var(--text2);
+}
+.info-fmt-tag span { color: var(--accent); }
+
+.info-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.info-field-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.info-field-card-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text3);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 7px;
+}
+.info-field-card-title-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+
+.info-tags {
+  display: flex; flex-wrap: wrap; gap: 5px;
+}
+
+.info-tag {
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  border-radius: 5px; padding: 2px 8px;
+  background: var(--bg3); color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+/* ── Section Label ──────────────────────────────────────────────────────── */
 .section-label {
   font-size: 11px; font-weight: 700; letter-spacing: 2px;
   text-transform: uppercase; color: var(--text3);
