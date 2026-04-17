@@ -88,7 +88,13 @@ function parseLinha(linha) {
 
   if (!rec.nome) rec.nome = nomeParts.join(' ');
 
-  const numStr = numericParts.join('');
+  // Regra: linha com texto + 2 ou mais grupos numéricos → ignora o primeiro grupo
+  // (o primeiro costuma ser um ID/sequência de registro sem valor de dado)
+  const numericUsados = (nomeParts.length > 0 && numericParts.length >= 2)
+    ? numericParts.slice(1)
+    : numericParts;
+
+  const numStr = numericUsados.join('');
   if (numStr.length >= 10) {
     const { tels, sobra } = extrairTelsBR(numStr);
     for (const t of tels) {
