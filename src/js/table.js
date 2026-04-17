@@ -31,6 +31,6 @@ function tagClass(key) {
   if (['cpf','cnpj','rg','cnh','ctps','pis','nit','matricula','docNum','passaporte','tituloEleitor'].includes(key)) return 'tag-doc';
   if (key === 'uf') return 'tag-uf';
   if (['emails','site'].includes(key)) return 'tag-email';
-  if (['valor','preco','total','subtotal','desconto','frete','juros','salario'].includes(key)) return 'tag-fin';
+  if (['valor','preco','total','subtotal','custo','desconto','frete','acrescimo','juros','multa','salario','rendimento'].includes(key)) return 'tag-fin';
   return 'tag-gen';
 }
