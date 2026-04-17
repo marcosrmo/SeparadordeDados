@@ -42,21 +42,15 @@
       <div class="info-steps">
         <div class="info-step">
           <div class="info-step-num">1</div>
-          <div class="info-step-text">
-            <strong>Cole o texto bruto</strong> — uma linha por registro. Pode ser lista de leads, exportação de planilha, resultado de sistema, qualquer formato.
-          </div>
+          <div class="info-step-text"><strong>Cole o texto bruto</strong> — uma linha por registro, em qualquer formato.</div>
         </div>
         <div class="info-step">
           <div class="info-step-num">2</div>
-          <div class="info-step-text">
-            <strong>Clique em "Separar dados"</strong> — o sistema lê cada linha e identifica automaticamente nome, telefones, documentos, endereço e dezenas de outros campos.
-          </div>
+          <div class="info-step-text"><strong>Clique em "Separar dados"</strong> — cada campo é identificado automaticamente.</div>
         </div>
         <div class="info-step">
           <div class="info-step-num">3</div>
-          <div class="info-step-text">
-            <strong>Exporte como CSV ou XLSX</strong> — cada campo vira uma coluna separada, pronta para importar em qualquer planilha ou CRM.
-          </div>
+          <div class="info-step-text"><strong>Exporte CSV ou XLSX</strong> — cada campo vira uma coluna, pronta para qualquer planilha ou CRM.</div>
         </div>
       </div>
       <div class="info-formats">
@@ -67,239 +61,92 @@
       </div>
     </div>
 
-    <div class="section-label" style="margin-bottom:8px">O que é extraído — +70 campos detectados automaticamente</div>
-    <div class="info-fields-grid">
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--accent)"></div>
-          Pessoa
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Nome</span>
-          <span class="info-tag">Vendedor</span>
-          <span class="info-tag">Responsável</span>
-          <span class="info-tag">Titular</span>
-          <span class="info-tag">Sócio</span>
-          <span class="info-tag">Representante</span>
-          <span class="info-tag">Diretor</span>
-          <span class="info-tag">Nascimento</span>
-          <span class="info-tag">Naturalidade</span>
-          <span class="info-tag">Nacionalidade</span>
-          <span class="info-tag">Sexo</span>
-          <span class="info-tag">Estado Civil</span>
-          <span class="info-tag">Profissão</span>
-          <span class="info-tag">Cargo</span>
-        </div>
+    <div class="info-field-card" style="border-radius:16px">
+      <div class="info-field-card-title" style="margin-bottom:14px;font-size:11px">
+        O que é extraído — +70 campos detectados automaticamente
       </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
 
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--cel)"></div>
-          Telefone &amp; Contato
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--accent)">Pessoa</span>
+          <div class="info-tags">
+            <span class="info-tag">Nome</span><span class="info-tag">Vendedor</span><span class="info-tag">Responsável</span><span class="info-tag">Titular</span><span class="info-tag">Sócio</span><span class="info-tag">Representante</span><span class="info-tag">Diretor</span><span class="info-tag">Nascimento</span><span class="info-tag">Naturalidade</span><span class="info-tag">Nacionalidade</span><span class="info-tag">Sexo</span><span class="info-tag">Estado Civil</span><span class="info-tag">Profissão</span><span class="info-tag">Cargo</span>
+          </div>
         </div>
-        <div class="info-tags">
-          <span class="info-tag">Celular</span>
-          <span class="info-tag">Telefone/Fixo</span>
-          <span class="info-tag">WhatsApp</span>
-          <span class="info-tag">Ramal</span>
-          <span class="info-tag">Fax</span>
-          <span class="info-tag">Contato</span>
-          <span class="info-tag">Email</span>
-          <span class="info-tag">Site</span>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--cel)">Contato</span>
+          <div class="info-tags">
+            <span class="info-tag">Celular</span><span class="info-tag">Telefone</span><span class="info-tag">WhatsApp</span><span class="info-tag">Ramal</span><span class="info-tag">Fax</span><span class="info-tag">Contato</span><span class="info-tag">Email</span><span class="info-tag">Site</span>
+          </div>
         </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--doc)">Documentos</span>
+          <div class="info-tags">
+            <span class="info-tag">CPF</span><span class="info-tag">CNPJ</span><span class="info-tag">RG</span><span class="info-tag">CNH</span><span class="info-tag">CTPS</span><span class="info-tag">PIS</span><span class="info-tag">NIT</span><span class="info-tag">Matrícula</span><span class="info-tag">Passaporte</span><span class="info-tag">Título Eleitor</span><span class="info-tag">Documento</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:#00c8ff">Empresa</span>
+          <div class="info-tags">
+            <span class="info-tag">Empresa</span><span class="info-tag">Razão Social</span><span class="info-tag">Nome Fantasia</span><span class="info-tag">Fornecedor</span><span class="info-tag">Fabricante</span><span class="info-tag">Transportadora</span><span class="info-tag">Parceiro</span><span class="info-tag">IE</span><span class="info-tag">IM</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--uf)">Endereço</span>
+          <div class="info-tags">
+            <span class="info-tag">Endereço</span><span class="info-tag">Rua</span><span class="info-tag">Avenida</span><span class="info-tag">Alameda</span><span class="info-tag">Travessa</span><span class="info-tag">Estrada</span><span class="info-tag">Rodovia</span><span class="info-tag">Número</span><span class="info-tag">Complemento</span><span class="info-tag">Bairro</span><span class="info-tag">Distrito</span><span class="info-tag">Setor</span><span class="info-tag">Cidade</span><span class="info-tag">UF</span><span class="info-tag">CEP</span><span class="info-tag">País</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--text2)">Data / Hora</span>
+          <div class="info-tags">
+            <span class="info-tag">Data</span><span class="info-tag">Data Emissão</span><span class="info-tag">Data Entrega</span><span class="info-tag">Entrega</span><span class="info-tag">Prazo</span><span class="info-tag">Vencimento</span><span class="info-tag">Validade</span><span class="info-tag">Fabricação</span><span class="info-tag">Hora</span><span class="info-tag">Horário</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--fix)">Produto</span>
+          <div class="info-tags">
+            <span class="info-tag">Produto</span><span class="info-tag">Item</span><span class="info-tag">Serviço</span><span class="info-tag">Bem</span><span class="info-tag">Ativo</span><span class="info-tag">Cor</span><span class="info-tag">Tamanho</span><span class="info-tag">Medida</span><span class="info-tag">Largura</span><span class="info-tag">Altura</span><span class="info-tag">Comprimento</span><span class="info-tag">Peso</span><span class="info-tag">Quantidade</span><span class="info-tag">Unidade</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:#ffd700">Financeiro</span>
+          <div class="info-tags">
+            <span class="info-tag">Valor</span><span class="info-tag">Preço</span><span class="info-tag">Total</span><span class="info-tag">Subtotal</span><span class="info-tag">Custo</span><span class="info-tag">Desconto</span><span class="info-tag">Frete</span><span class="info-tag">Acréscimo</span><span class="info-tag">Juros</span><span class="info-tag">Multa</span><span class="info-tag">Salário</span><span class="info-tag">Rendimento</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--accent2)">Identificadores</span>
+          <div class="info-tags">
+            <span class="info-tag">Código</span><span class="info-tag">ID</span><span class="info-tag">Pedido</span><span class="info-tag">Ordem</span><span class="info-tag">Protocolo</span><span class="info-tag">Processo</span><span class="info-tag">Nota Fiscal</span><span class="info-tag">NF-e</span><span class="info-tag">Série</span><span class="info-tag">Chave</span><span class="info-tag">Contrato</span><span class="info-tag">Apólice</span><span class="info-tag">Sinistro</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:var(--text3)">Detalhes</span>
+          <div class="info-tags">
+            <span class="info-tag">Marca</span><span class="info-tag">Modelo</span><span class="info-tag">Referência</span><span class="info-tag">SKU</span><span class="info-tag">Categoria</span><span class="info-tag">Tipo</span><span class="info-tag">Status</span><span class="info-tag">Situação</span><span class="info-tag">Descrição</span><span class="info-tag">Observação</span><span class="info-tag">Especificação</span><span class="info-tag">Característica</span><span class="info-tag">Lote</span><span class="info-tag">Garantia</span>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-row-label" style="color:#00c8ff">Pagamento</span>
+          <div class="info-tags">
+            <span class="info-tag">Pagamento</span><span class="info-tag">Forma Pagamento</span><span class="info-tag">Parcelas</span><span class="info-tag">Banco</span><span class="info-tag">Agência</span><span class="info-tag">Conta</span><span class="info-tag">PIX</span><span class="info-tag">Boleto</span><span class="info-tag">Cartão</span>
+          </div>
+        </div>
+
       </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--doc)"></div>
-          Documentos
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">CPF</span>
-          <span class="info-tag">CNPJ</span>
-          <span class="info-tag">RG</span>
-          <span class="info-tag">CNH</span>
-          <span class="info-tag">CTPS</span>
-          <span class="info-tag">PIS</span>
-          <span class="info-tag">NIT</span>
-          <span class="info-tag">Matrícula</span>
-          <span class="info-tag">Passaporte</span>
-          <span class="info-tag">Título Eleitor</span>
-          <span class="info-tag">Documento</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:#00c8ff"></div>
-          Empresa
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Empresa</span>
-          <span class="info-tag">Razão Social</span>
-          <span class="info-tag">Nome Fantasia</span>
-          <span class="info-tag">Fornecedor</span>
-          <span class="info-tag">Fabricante</span>
-          <span class="info-tag">Transportadora</span>
-          <span class="info-tag">Parceiro</span>
-          <span class="info-tag">IE</span>
-          <span class="info-tag">IM</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--uf)"></div>
-          Endereço
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Endereço</span>
-          <span class="info-tag">Rua</span>
-          <span class="info-tag">Avenida</span>
-          <span class="info-tag">Alameda</span>
-          <span class="info-tag">Travessa</span>
-          <span class="info-tag">Estrada</span>
-          <span class="info-tag">Rodovia</span>
-          <span class="info-tag">Número</span>
-          <span class="info-tag">Complemento</span>
-          <span class="info-tag">Bairro</span>
-          <span class="info-tag">Distrito</span>
-          <span class="info-tag">Setor</span>
-          <span class="info-tag">Cidade</span>
-          <span class="info-tag">UF</span>
-          <span class="info-tag">CEP</span>
-          <span class="info-tag">País</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--text2)"></div>
-          Data &amp; Hora
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Data</span>
-          <span class="info-tag">Data Emissão</span>
-          <span class="info-tag">Data Entrega</span>
-          <span class="info-tag">Entrega</span>
-          <span class="info-tag">Prazo</span>
-          <span class="info-tag">Vencimento</span>
-          <span class="info-tag">Validade</span>
-          <span class="info-tag">Fabricação</span>
-          <span class="info-tag">Hora</span>
-          <span class="info-tag">Horário</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--fix)"></div>
-          Produto &amp; Serviço
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Produto</span>
-          <span class="info-tag">Item</span>
-          <span class="info-tag">Serviço</span>
-          <span class="info-tag">Bem</span>
-          <span class="info-tag">Ativo</span>
-          <span class="info-tag">Cor</span>
-          <span class="info-tag">Tamanho</span>
-          <span class="info-tag">Medida</span>
-          <span class="info-tag">Largura</span>
-          <span class="info-tag">Altura</span>
-          <span class="info-tag">Comprimento</span>
-          <span class="info-tag">Peso</span>
-          <span class="info-tag">Quantidade</span>
-          <span class="info-tag">Unidade</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:#ffd700"></div>
-          Financeiro
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Valor</span>
-          <span class="info-tag">Preço</span>
-          <span class="info-tag">Total</span>
-          <span class="info-tag">Subtotal</span>
-          <span class="info-tag">Custo</span>
-          <span class="info-tag">Desconto</span>
-          <span class="info-tag">Frete</span>
-          <span class="info-tag">Acréscimo</span>
-          <span class="info-tag">Juros</span>
-          <span class="info-tag">Multa</span>
-          <span class="info-tag">Salário</span>
-          <span class="info-tag">Rendimento</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--accent2)"></div>
-          Identificadores
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Código</span>
-          <span class="info-tag">ID</span>
-          <span class="info-tag">Pedido</span>
-          <span class="info-tag">Ordem</span>
-          <span class="info-tag">Protocolo</span>
-          <span class="info-tag">Processo</span>
-          <span class="info-tag">Nota Fiscal</span>
-          <span class="info-tag">NF-e</span>
-          <span class="info-tag">Série</span>
-          <span class="info-tag">Chave</span>
-          <span class="info-tag">Contrato</span>
-          <span class="info-tag">Apólice</span>
-          <span class="info-tag">Sinistro</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:var(--text3)"></div>
-          Detalhes do Produto
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Marca</span>
-          <span class="info-tag">Modelo</span>
-          <span class="info-tag">Referência</span>
-          <span class="info-tag">SKU</span>
-          <span class="info-tag">Categoria</span>
-          <span class="info-tag">Tipo</span>
-          <span class="info-tag">Status</span>
-          <span class="info-tag">Situação</span>
-          <span class="info-tag">Descrição</span>
-          <span class="info-tag">Observação</span>
-          <span class="info-tag">Especificação</span>
-          <span class="info-tag">Característica</span>
-          <span class="info-tag">Lote</span>
-          <span class="info-tag">Garantia</span>
-        </div>
-      </div>
-
-      <div class="info-field-card">
-        <div class="info-field-card-title">
-          <div class="info-field-card-title-dot" style="background:#00c8ff"></div>
-          Pagamento
-        </div>
-        <div class="info-tags">
-          <span class="info-tag">Pagamento</span>
-          <span class="info-tag">Forma Pagamento</span>
-          <span class="info-tag">Parcelas</span>
-          <span class="info-tag">Banco</span>
-          <span class="info-tag">Agência</span>
-          <span class="info-tag">Conta</span>
-          <span class="info-tag">PIX</span>
-          <span class="info-tag">Boleto</span>
-          <span class="info-tag">Cartão</span>
-        </div>
-      </div>
-
     </div>
+
   </div>
   <!-- ──────────────────────────────────────────────────────────────────────── -->
 
