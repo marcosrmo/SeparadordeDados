@@ -50,6 +50,28 @@ function identificarDocNums(sobra, rec) {
   if (s && !rec.docNum) rec.docNum = s;
 }
 
+// Palavras-gatilho de endereço: detectam o prefixo (RUA, AV, BAIRRO, etc.)
+// e absorvem as próximas palavras não-numéricas como valor do campo.
+const ADDR_TRIGGERS = [
+  { re: /^(RUA|R\.?)$/i,                  campo: 'rua' },
+  { re: /^(AV\.?|AVENIDA)$/i,             campo: 'avenida' },
+  { re: /^(AL\.?|ALAMEDA)$/i,             campo: 'alameda' },
+  { re: /^(TRAV\.?|TRAVESSA|TV\.?)$/i,    campo: 'travessa' },
+  { re: /^(EST\.?|ESTRADA)$/i,            campo: 'estrada' },
+  { re: /^(ROD\.?|RODOVIA)$/i,            campo: 'rodovia' },
+  { re: /^(FAZ\.?|FAZENDA)$/i,            campo: 'rua' },
+  { re: /^(LOT\.?|LOTEAMENTO)$/i,         campo: 'bairro' },
+  { re: /^(SITIO|SÍTIO)$/i,               campo: 'rua' },
+  { re: /^(BAIRRO|BRO\.?)$/i,             campo: 'bairro' },
+  { re: /^(DISTRITO|DIST\.?)$/i,          campo: 'distrito' },
+  { re: /^(SETOR)$/i,                     campo: 'setor' },
+  { re: /^(QUADRA|QD\.?)$/i,              campo: 'complemento' },
+  { re: /^(CONJ\.?|CONJUNTO)$/i,          campo: 'complemento' },
+  { re: /^(APTO?\.?|AP\.?)$/i,            campo: 'complemento' },
+  { re: /^(BLOCO?|BL\.?)$/i,              campo: 'complemento' },
+  { re: /^(N[°ºo]?\.?|NRO\.?|NUMERO)$/i,  campo: 'numero' },
+];
+
 function parseLinha(linha) {
   linha = linha.trim();
   if (!linha) return null;
@@ -57,6 +79,7 @@ function parseLinha(linha) {
   const rec = {};
   COLUNAS.forEach(c => { rec[c.key] = c.multi ? [] : ''; });
 
+  // 1) Formato rotulado: CAMPO: valor CAMPO2: valor2 ...
   const rotulado = /\b([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30})\s*[:=]\s*([^\s:][^:]*?)(?=\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30}\s*[:=]|$)/g;
   let matchRot;
   const linhaCopia = linha;
@@ -71,6 +94,7 @@ function parseLinha(linha) {
     }
   }
 
+  // 2) UF no final da linha
   if (!rec.uf) {
     const ufMatch = linha.match(/\b([A-Z]{2})\s*$/);
     if (ufMatch && UF_LIST.includes(ufMatch[1])) {
@@ -79,22 +103,44 @@ function parseLinha(linha) {
     }
   }
 
+  // 3) Varre tokens: gatilhos de endereço absorvem palavras seguintes,
+  //    números vão pra pilha numérica, demais vão pro nome.
   const partes = linha.split(/\s+/).filter(Boolean);
-  const nomeParts = [], numericParts = [];
-  for (const p of partes) {
-    if (/^\d+$/.test(p)) numericParts.push(p);
-    else if (p.length > 1) nomeParts.push(p);
+  const nomeParts = [];
+  const numericParts = [];
+  let i = 0;
+  while (i < partes.length) {
+    const p = partes[i];
+
+    if (/^\d+$/.test(p)) {
+      numericParts.push(p);
+      i++;
+      continue;
+    }
+
+    const trigger = ADDR_TRIGGERS.find(t => t.re.test(p));
+    if (trigger) {
+      const partesCampo = [p];
+      i++;
+      while (i < partes.length && !/^\d+$/.test(partes[i])) {
+        if (ADDR_TRIGGERS.some(t => t.re.test(partes[i]))) break;
+        partesCampo.push(partes[i]);
+        i++;
+      }
+      const novoValor = partesCampo.join(' ');
+      const valorAtual = rec[trigger.campo];
+      rec[trigger.campo] = valorAtual ? valorAtual + ' ' + novoValor : novoValor;
+      continue;
+    }
+
+    if (p.length > 1) nomeParts.push(p);
+    i++;
   }
 
   if (!rec.nome) rec.nome = nomeParts.join(' ');
 
-  // Regra: linha com texto + 2 ou mais grupos numéricos → ignora o primeiro grupo
-  // (o primeiro costuma ser um ID/sequência de registro sem valor de dado)
-  const numericUsados = (nomeParts.length > 0 && numericParts.length >= 2)
-    ? numericParts.slice(1)
-    : numericParts;
-
-  const numStr = numericUsados.join('');
+  // 4) Processa números acumulados
+  const numStr = numericParts.join('');
   if (numStr.length >= 10) {
     const { tels, sobra } = extrairTelsBR(numStr);
     for (const t of tels) {

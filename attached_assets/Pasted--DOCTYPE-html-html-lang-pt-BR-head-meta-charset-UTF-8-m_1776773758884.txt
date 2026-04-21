@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Separador de Dados — Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --bg2: #16161a;
+    --bg3: #1e1e24;
+    --border: #2a2a35;
+    --border2: #38384a;
+    --accent: #00e5a0;
+    --accent2: #00b87a;
+    --accent-dim: rgba(0,229,160,0.1);
+    --accent-dim2: rgba(0,229,160,0.05);
+    --text: #f0f0f4;
+    --text2: #8888a0;
+    --text3: #555568;
+    --cel: #3a7fff;
+    --cel-bg: rgba(58,127,255,0.12);
+    --fix: #ff9f3a;
+    --fix-bg: rgba(255,159,58,0.12);
+    --doc: #c97eff;
+    --doc-bg: rgba(201,126,255,0.12);
+    --uf: #ff5f8a;
+    --uf-bg: rgba(255,95,138,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* Header */
+  header {
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .logo-group { display: flex; align-items: center; gap: 16px; }
+
+  .logo-icon {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-icon svg { width: 26px; height: 26px; }
+
+  h1 {
+    font-size: 28px; font-weight: 800; letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    font-size: 13px; color: var(--text2); margin-top: 4px; font-weight: 400;
+  }
+
+  .badge-br {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text2);
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 14px;
+  }
+
+  /* Input area */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 12px;
+  }
+
+  .input-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .input-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .input-header-left { display: flex; align-items: center; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  textarea {
+    width: 100%; min-height: 200px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    background: transparent; color: var(--text);
+    border: none; outline: none; resize: vertical;
+    padding: 20px; line-height: 1.8;
+  }
+  textarea::placeholder { color: var(--text3); }
+
+  .input-footer {
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  .char-count { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+
+  .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  button {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; font-size: 13px; font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    border-radius: 10px; cursor: pointer; border: none;
+    transition: all 0.15s;
+  }
+  button:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: var(--accent); color: #000;
+  }
+  .btn-primary:hover { background: #00ffb2; }
+
+  .btn-secondary {
+    background: var(--bg3); color: var(--text2);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: var(--border); color: var(--text); }
+
+  .btn-ghost {
+    background: transparent; color: var(--text3);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border2); }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin: 24px 0; opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .stats-bar.visible { opacity: 1; }
+
+  .stat-pill {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 18px;
+  }
+  .stat-pill-n { font-size: 22px; font-weight: 800; }
+  .stat-pill-n.green { color: var(--accent); }
+  .stat-pill-n.blue { color: var(--cel); }
+  .stat-pill-n.orange { color: var(--fix); }
+  .stat-pill-l { font-size: 12px; color: var(--text2); }
+
+  /* Legend */
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 16px; opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .legend.visible { opacity: 1; }
+
+  .leg-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text2);
+  }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .leg-dot.cel { background: var(--cel); }
+  .leg-dot.fix { background: var(--fix); }
+  .leg-dot.doc { background: var(--doc); }
+  .leg-dot.uf { background: var(--uf); }
+  .leg-dot.nome { background: var(--accent); }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .table-wrap.visible { opacity: 1; transform: translateY(0); }
+
+  table {
+    width: 100%; border-collapse: collapse; min-width: 700px;
+  }
+
+  thead { background: var(--bg3); }
+  th {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text3);
+    padding: 14px 16px; text-align: left; white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+  }
+  th:first-child { border-radius: 0; width: 40px; }
+
+  td {
+    padding: 12px 16px; font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  tbody tr { transition: background 0.1s; }
+
+  .td-num { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+  .td-nome { font-weight: 700; color: var(--text); }
+
+  .tag {
+    display: inline-block; font-size: 12px; font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 6px; padding: 3px 9px; margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+  .tag-cel { background: var(--cel-bg); color: var(--cel); }
+  .tag-fix { background: var(--fix-bg); color: var(--fix); }
+  .tag-doc { background: var(--doc-bg); color: var(--doc); }
+  .tag-uf  { background: var(--uf-bg); color: var(--uf); font-weight: 700; }
+  .tag-empty { color: var(--text3); font-size: 11px; }
+
+  /* Empty / error states */
+  .empty-state {
+    text-align: center; padding: 60px 20px;
+    color: var(--text3); font-size: 14px;
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+  }
+
+  .toast {
+    position: fixed; bottom: 32px; right: 32px;
+    background: var(--accent); color: #000;
+    font-size: 13px; font-weight: 700;
+    padding: 12px 20px; border-radius: 10px;
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s; z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 22px; }
+    header { padding: 32px 0 28px; }
+  }
+
+  /* Preview notice */
+  .preview-notice {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.25);
+    border-radius: 10px; padding: 12px 18px;
+    font-size: 13px; color: var(--text2);
+    margin-bottom: 14px;
+  }
+  .preview-notice strong { color: var(--accent); }
+
+  /* Extra tag colors */
+  .tag-email { background: rgba(0,200,255,0.12); color: #00c8ff; }
+  .tag-fin   { background: rgba(255,220,50,0.12); color: #ffd700; }
+  .tag-gen   { background: rgba(160,160,180,0.1); color: var(--text2); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo-group">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6h18M3 12h12M3 18h8" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M18 14l3 3-3 3" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 17h-5" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Separador de <span>Dados BR</span></h1>
+        <div class="subtitle">Extrai nome, telefones, documento e UF — DDDs validados por estado</div>
+      </div>
+    </div>
+    <div class="badge-br">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" fill="#009c3b"/><path d="M7 2.5L12 7L7 11.5L2 7L7 2.5Z" fill="#FEDF00"/><circle cx="7" cy="7" r="2" fill="#002776"/></svg>
+      Formato brasileiro
+    </div>
+  </header>
+
+  <div class="section-label">Dados de entrada</div>
+  <div class="input-card">
+    <div class="input-header">
+      <div class="input-header-left">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <span style="font-size:12px;color:var(--text3)">linhas_brutas.txt</span>
+    </div>
+    <textarea id="input"
+      placeholder="Cole suas linhas aqui, uma por linha...
+Exemplo:
+HENRIQUE CANDIDO RIBEIRO DE MARAIS 86594 0003363349800099794909 PB
+MARIA APARECIDA SOUZA 12345 01198765432100112223334 SP
+JOAO PEDRO ALVES 99812 08332456789183987654321 PB"></textarea>
+    <div class="input-footer">
+      <span class="char-count" id="charCount">0 linhas</span>
+      <div class="btn-group">
+        <button class="btn-ghost" onclick="limpar()">Limpar</button>
+        <button class="btn-secondary" id="btnCSV" onclick="baixarCSV()" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 11h10M7 2v7M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Baixar CSV
+        </button>
+        <button class="btn-secondary" id="btnXLSX" onclick="baixarXLSX()" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5l4 4M9 5l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Baixar XLSX
+        </button>
+        <button class="btn-primary" onclick="processar()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Separar dados
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n green" id="sLinhas">0</div>
+        <div class="stat-pill-l">linhas processadas</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n blue" id="sCelulares">0</div>
+        <div class="stat-pill-l">celulares encontrados</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n orange" id="sFixos">0</div>
+        <div class="stat-pill-l">fixos encontrados</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n" style="color:var(--uf)" id="sUFs">0</div>
+        <div class="stat-pill-l">com estado (UF)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend" id="legend">
+    <div class="leg-item"><div class="leg-dot nome"></div> Nome</div>
+    <div class="leg-item"><div class="leg-dot cel"></div> Celular</div>
+    <div class="leg-item"><div class="leg-dot fix"></div> Fixo</div>
+    <div class="leg-item"><div class="leg-dot doc"></div> Número doc</div>
+    <div class="leg-item"><div class="leg-dot uf"></div> Estado (UF)</div>
+  </div>
+
+  <div id="resultArea"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+<script>
+let dadosFinais = [];
+const PREVIEW_LIMIT = 100;
+
+const input = document.getElementById('input');
+input.addEventListener('input', () => {
+  const n = input.value.split('\n').filter(l => l.trim()).length;
+  document.getElementById('charCount').textContent = n + (n === 1 ? ' linha' : ' linhas');
+});
+
+// ─── Colunas na ordem certa ──────────────────────────────────────────────────
+const COLUNAS = [
+  { key:'nome',           label:'Nome' },
+  { key:'vendedor',       label:'Vendedor' },
+  { key:'responsavel',    label:'Responsável' },
+  { key:'titular',        label:'Titular' },
+  { key:'socio',          label:'Sócio' },
+  { key:'representante',  label:'Representante' },
+  { key:'diretor',        label:'Diretor' },
+  { key:'nascimento',     label:'Nascimento' },
+  { key:'naturalidade',   label:'Naturalidade' },
+  { key:'nacionalidade',  label:'Nacionalidade' },
+  { key:'sexo',           label:'Sexo' },
+  { key:'estadocivil',    label:'Estado Civil' },
+  { key:'profissao',      label:'Profissão' },
+  { key:'cargo',          label:'Cargo' },
+  { key:'celulares',      label:'Celular',       multi:true },
+  { key:'fixos',          label:'Fixo',          multi:true },
+  { key:'whatsapp',       label:'WhatsApp',      multi:true },
+  { key:'ramal',          label:'Ramal' },
+  { key:'fax',            label:'Fax' },
+  { key:'contato',        label:'Contato' },
+  { key:'emails',         label:'Email',         multi:true },
+  { key:'site',           label:'Site' },
+  { key:'cpf',            label:'CPF' },
+  { key:'cnpj',           label:'CNPJ' },
+  { key:'rg',             label:'RG' },
+  { key:'cnh',            label:'CNH' },
+  { key:'ctps',           label:'CTPS' },
+  { key:'pis',            label:'PIS' },
+  { key:'nit',            label:'NIT' },
+  { key:'matricula',      label:'Matrícula' },
+  { key:'docNum',         label:'Documento' },
+  { key:'passaporte',     label:'Passaporte' },
+  { key:'tituloEleitor',  label:'Título Eleitor' },
+  { key:'empresa',        label:'Empresa' },
+  { key:'razaoSocial',    label:'Razão Social' },
+  { key:'nomefantasia',   label:'Nome Fantasia' },
+  { key:'fornecedor',     label:'Fornecedor' },
+  { key:'fabricante',     label:'Fabricante' },
+  { key:'transportadora', label:'Transportadora' },
+  { key:'parceiro',       label:'Parceiro' },
+  { key:'ie',             label:'IE' },
+  { key:'im',             label:'IM' },
+  { key:'data',           label:'Data' },
+  { key:'dataEmissao',    label:'Data Emissão' },
+  { key:'dataEntrega',    label:'Data Entrega' },
+  { key:'prazo',          label:'Prazo' },
+  { key:'vencimento',     label:'Vencimento' },
+  { key:'validade',       label:'Validade' },
+  { key:'hora',           label:'Hora' },
+  { key:'endereco',       label:'Endereço' },
+  { key:'rua',            label:'Rua' },
+  { key:'avenida',        label:'Avenida' },
+  { key:'bairro',         label:'Bairro' },
+  { key:'cidade',         label:'Cidade' },
+  { key:'uf',             label:'UF' },
+  { key:'cep',            label:'CEP' },
+  { key:'pais',           label:'País' },
+  { key:'numero',         label:'Número' },
+  { key:'complemento',    label:'Complemento' },
+  { key:'produto',        label:'Produto' },
+  { key:'item',           label:'Item' },
+  { key:'servico',        label:'Serviço' },
+  { key:'cor',            label:'Cor' },
+  { key:'tamanho',        label:'Tamanho' },
+  { key:'peso',           label:'Peso' },
+  { key:'quantidade',     label:'Quantidade' },
+  { key:'unidade',        label:'Unidade' },
+  { key:'valor',          label:'Valor' },
+  { key:'preco',          label:'Preço' },
+  { key:'total',          label:'Total' },
+  { key:'subtotal',       label:'Subtotal' },
+  { key:'desconto',       label:'Desconto' },
+  { key:'frete',          label:'Frete' },
+  { key:'juros',          label:'Juros' },
+  { key:'salario',        label:'Salário' },
+  { key:'codigo',         label:'Código' },
+  { key:'id',             label:'ID' },
+  { key:'pedido',         label:'Pedido' },
+  { key:'protocolo',      label:'Protocolo' },
+  { key:'processo',       label:'Processo' },
+  { key:'notaFiscal',     label:'Nota Fiscal' },
+  { key:'nfe',            label:'NF-e' },
+  { key:'contrato',       label:'Contrato' },
+  { key:'apolice',        label:'Apólice' },
+  { key:'sinistro',       label:'Sinistro' },
+  { key:'marca',          label:'Marca' },
+  { key:'modelo',         label:'Modelo' },
+  { key:'referencia',     label:'Referência' },
+  { key:'sku',            label:'SKU' },
+  { key:'categoria',      label:'Categoria' },
+  { key:'tipo',           label:'Tipo' },
+  { key:'status',         label:'Status' },
+  { key:'situacao',       label:'Situação' },
+  { key:'descricao',      label:'Descrição' },
+  { key:'observacao',     label:'Observação' },
+  { key:'lote',           label:'Lote' },
+  { key:'garantia',       label:'Garantia' },
+  { key:'pagamento',      label:'Pagamento' },
+  { key:'formaPagamento', label:'Forma Pagamento' },
+  { key:'parcelas',       label:'Parcelas' },
+  { key:'banco',          label:'Banco' },
+  { key:'agencia',        label:'Agência' },
+  { key:'conta',          label:'Conta' },
+  { key:'pix',            label:'PIX' },
+  { key:'boleto',         label:'Boleto' },
+  { key:'cartao',         label:'Cartão' },
+];
+
+// ─── Sinônimos para campos rotulados (ex: "CPF: 123") ───────────────────────
+const SINONIMOS = {
+  nome:'nome', name:'nome', cliente:'nome', comprador:'nome', proprietario:'nome',
+  segurado:'nome', paciente:'nome', funcionario:'nome', colaborador:'nome',
+  vendedor:'vendedor', responsavel:'responsavel', titular:'titular',
+  socio:'socio', representante:'representante', diretor:'diretor',
+  nascimento:'nascimento', dtnasc:'nascimento', datanasc:'nascimento',
+  naturalidade:'naturalidade', nacionalidade:'nacionalidade',
+  sexo:'sexo', genero:'sexo', estadocivil:'estadocivil',
+  profissao:'profissao', ocupacao:'profissao', cargo:'cargo',
+  telefone:'fixos', tel:'fixos', fone:'fixos', phone:'fixos',
+  celular:'celulares', cel:'celulares', movel:'celulares', mobile:'celulares',
+  telefonecelular:'celulares', telcel:'celulares',
+  whatsapp:'whatsapp', wpp:'whatsapp',
+  ramal:'ramal', fax:'fax', contato:'contato',
+  email:'emails', mail:'emails', correio:'emails',
+  site:'site', website:'site', url:'site',
+  cpf:'cpf', cnpj:'cnpj', rg:'rg', cnh:'cnh', ctps:'ctps',
+  pis:'pis', pasep:'pis', nit:'nit', matricula:'matricula',
+  documento:'docNum', doc:'docNum', identidade:'rg', habilitacao:'cnh',
+  passaporte:'passaporte', titulo:'tituloEleitor',
+  empresa:'empresa', razaosocial:'razaoSocial', nomefantasia:'nomefantasia',
+  fantasia:'nomefantasia', fornecedor:'fornecedor', fabricante:'fabricante',
+  transportadora:'transportadora', parceiro:'parceiro',
+  ie:'ie', inscricaoestadual:'ie', inscestadual:'ie',
+  im:'im', inscricaomunicipal:'im',
+  data:'data', date:'data', dt:'data',
+  dataemissao:'dataEmissao', dataentrega:'dataEntrega',
+  prazo:'prazo', vencimento:'vencimento', validade:'validade',
+  hora:'hora', horario:'hora',
+  endereco:'endereco', logradouro:'endereco', address:'endereco',
+  rua:'rua', avenida:'avenida', av:'avenida',
+  bairro:'bairro', cidade:'cidade', municipio:'cidade',
+  uf:'uf', estado:'uf', cep:'cep', zip:'cep',
+  pais:'pais', country:'pais',
+  numero:'numero', nro:'numero', complemento:'complemento', apto:'complemento',
+  produto:'produto', product:'produto', mercadoria:'produto',
+  item:'item', servico:'servico', bem:'servico',
+  cor:'cor', tamanho:'tamanho', tam:'tamanho',
+  peso:'peso', quantidade:'quantidade', qtd:'quantidade', qt:'quantidade', qtde:'quantidade',
+  unidade:'unidade', un:'unidade',
+  valor:'valor', preco:'preco', price:'preco', total:'total',
+  subtotal:'subtotal', custo:'valor', desconto:'desconto', frete:'frete',
+  juros:'juros', multa:'juros', salario:'salario', remuneracao:'salario',
+  codigo:'codigo', cod:'codigo', code:'codigo', id:'id',
+  pedido:'pedido', ordem:'pedido', protocolo:'protocolo', processo:'processo',
+  nota:'notaFiscal', nf:'notaFiscal', nfe:'nfe', contrato:'contrato',
+  apolice:'apolice', sinistro:'sinistro',
+  marca:'marca', modelo:'modelo', referencia:'referencia', sku:'sku',
+  categoria:'categoria', tipo:'tipo', status:'status', situacao:'situacao',
+  descricao:'descricao', obs:'observacao', observacao:'observacao',
+  lote:'lote', garantia:'garantia',
+  pagamento:'pagamento', forma:'formaPagamento', parcelas:'parcelas',
+  banco:'banco', agencia:'agencia', conta:'conta', pix:'pix',
+  boleto:'boleto', cartao:'cartao',
+};
+
+function normChave(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]/g,'');
+}
+
+// ─── DDDs válidos ─────────────────────────────────────────────────────────────
+const DDD_UF = {
+  68:'AC', 82:'AL', 96:'AP', 92:'AM', 97:'AM',
+  71:'BA', 73:'BA', 74:'BA', 75:'BA', 77:'BA',
+  85:'CE', 88:'CE', 61:'DF', 27:'ES', 28:'ES',
+  62:'GO', 64:'GO', 98:'MA', 99:'MA',
+  65:'MT', 66:'MT', 67:'MS',
+  31:'MG', 32:'MG', 33:'MG', 34:'MG', 35:'MG', 37:'MG', 38:'MG',
+  91:'PA', 93:'PA', 94:'PA', 83:'PB',
+  41:'PR', 42:'PR', 43:'PR', 44:'PR', 45:'PR', 46:'PR',
+  81:'PE', 87:'PE', 86:'PI', 89:'PI',
+  21:'RJ', 22:'RJ', 24:'RJ', 84:'RN',
+  51:'RS', 53:'RS', 54:'RS', 55:'RS',
+  69:'RO', 95:'RR', 47:'SC', 48:'SC', 49:'SC',
+  11:'SP', 12:'SP', 13:'SP', 14:'SP', 15:'SP',
+  16:'SP', 17:'SP', 18:'SP', 19:'SP',
+  79:'SE', 63:'TO',
+};
+const VALID_DDD = new Set(Object.keys(DDD_UF).map(Number));
+const UF_LIST   = [...new Set(Object.values(DDD_UF))].sort();
+// Adiciona estados sem DDD próprio que podem aparecer na sigla
+['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG',
+ 'PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'].forEach(u=>UF_LIST.includes(u)||UF_LIST.push(u));
+
+function isDddValido(ddd) { return VALID_DDD.has(Number(ddd)); }
+
+function formatarTel(num) {
+  num = num.replace(/\D/g,'');
+  if (num.length===11) return `(${num.slice(0,2)}) ${num.slice(2,7)}-${num.slice(7)}`;
+  if (num.length===10) return `(${num.slice(0,2)}) ${num.slice(2,6)}-${num.slice(6)}`;
+  return num;
+}
+function formatarCPF(n)  { return n.length===11 ? `${n.slice(0,3)}.${n.slice(3,6)}.${n.slice(6,9)}-${n.slice(9)}` : n; }
+function formatarCNPJ(n) { return n.length===14 ? `${n.slice(0,2)}.${n.slice(2,5)}.${n.slice(5,8)}/${n.slice(8,12)}-${n.slice(12)}` : n; }
+function formatarCEP(n)  { return n.length===8  ? `${n.slice(0,5)}-${n.slice(5)}` : n; }
+
+// ─── Extrai telefones de uma string de dígitos ────────────────────────────────
+function extrairTelsBR(str) {
+  const tels = [];
+  let s = str.replace(/\D/g,'');
+  while (s.length >= 10) {
+    let tel = null;
+    if (s.startsWith('0800')||s.startsWith('0300')||s.startsWith('0500')) {
+      tel = { num:s.slice(0,11), tipo:'fixo' }; s = s.slice(11);
+    } else if (s.startsWith('00')) {
+      s = s.slice(2);
+    } else if (s.length>=11 && s[2]==='9') {
+      const ddd=Number(s.slice(0,2));
+      if (isDddValido(ddd)) { tel={num:s.slice(0,11),tipo:'celular'}; s=s.slice(11); } else s=s.slice(1);
+    } else if (s.length>=11 && ['6','7','8'].includes(s[2])) {
+      const ddd=Number(s.slice(0,2));
+      if (isDddValido(ddd)) { tel={num:s.slice(0,11),tipo:'celular'}; s=s.slice(11); } else s=s.slice(1);
+    } else if (s.length>=10 && ['2','3','4','5'].includes(s[2])) {
+      const ddd=Number(s.slice(0,2));
+      if (isDddValido(ddd)) { tel={num:s.slice(0,10),tipo:'fixo'}; s=s.slice(10); } else s=s.slice(1);
+    } else { s=s.slice(1); }
+    if (tel) tels.push(tel);
+  }
+  return { tels, sobra:s };
+}
+
+// ─── Identifica CPF/CNPJ/CEP em um blob numérico ─────────────────────────────
+function identificarDocNums(sobra, rec) {
+  let s = sobra;
+  // CPF: 11 dígitos
+  let m = s.match(/^(\d{11})/);
+  if (m && !rec.cpf) { rec.cpf = formatarCPF(m[1]); s=s.slice(11); }
+  // CNPJ: 14 dígitos
+  m = s.match(/^(\d{14})/);
+  if (m && !rec.cnpj) { rec.cnpj = formatarCNPJ(m[1]); s=s.slice(14); }
+  // CEP: 8 dígitos
+  m = s.match(/^(\d{8})/);
+  if (m && !rec.cep) { rec.cep = formatarCEP(m[1]); s=s.slice(8); }
+  if (s && !rec.docNum) rec.docNum = s;
+}
+
+// ─── Parseia uma linha bruta ──────────────────────────────────────────────────
+function parseLinha(linha) {
+  linha = linha.trim();
+  if (!linha) return null;
+
+  // Registro base — todos os campos vazios / arrays vazios
+  const rec = {};
+  COLUNAS.forEach(c => { rec[c.key] = c.multi ? [] : ''; });
+
+  // 1) Tenta formato rotulado: CAMPO: valor CAMPO2: valor2 ...
+  // Ex: "CPF: 12345678900 Nome: João Tel: 83999887766"
+  const rotulado = /\b([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30})\s*[:=]\s*([^\s:][^:]*?)(?=\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30}\s*[:=]|$)/g;
+  let matchRot;
+  let temRotulo = false;
+  const linhaCopia = linha;
+  while ((matchRot = rotulado.exec(linhaCopia)) !== null) {
+    const chaveRaw = normChave(matchRot[1]);
+    const val = matchRot[2].trim();
+    const campo = SINONIMOS[chaveRaw];
+    if (campo) {
+      temRotulo = true;
+      if (Array.isArray(rec[campo])) rec[campo].push(val);
+      else rec[campo] = val;
+      linha = linha.replace(matchRot[0], ' ');
+    }
+  }
+
+  // 2) Detecta UF no final da linha
+  if (!rec.uf) {
+    const ufMatch = linha.match(/\b([A-Z]{2})\s*$/);
+    if (ufMatch && UF_LIST.includes(ufMatch[1])) {
+      rec.uf = ufMatch[1];
+      linha = linha.slice(0, linha.lastIndexOf(ufMatch[0])).trim();
+    }
+  }
+
+  // 3) Palavras-gatilho de endereço (NÃO vão pro nome)
+  // Cada entrada: { regex para detectar o prefixo, campo destino, captura o resto da frase? }
+  const ADDR_TRIGGERS = [
+    { re: /^(RUA|R\.?)$/i,           campo: 'rua',       seguinte: true  },
+    { re: /^(AV\.?|AVENIDA)$/i,      campo: 'avenida',   seguinte: true  },
+    { re: /^(AL\.?|ALAMEDA)$/i,      campo: 'avenida',   seguinte: true  },
+    { re: /^(TRAV\.?|TRAVESSA)$/i,   campo: 'rua',       seguinte: true  },
+    { re: /^(EST\.?|ESTRADA)$/i,     campo: 'rua',       seguinte: true  },
+    { re: /^(ROD\.?|RODOVIA)$/i,     campo: 'rua',       seguinte: true  },
+    { re: /^(FAZ\.?|FAZENDA)$/i,     campo: 'rua',       seguinte: true  },
+    { re: /^(LOT\.?|LOTEAMENTO)$/i,  campo: 'bairro',    seguinte: true  },
+    { re: /^(SITIO|SÍTIO)$/i,        campo: 'rua',       seguinte: true  },
+    { re: /^(BAIRRO|BRO\.?)$/i,      campo: 'bairro',    seguinte: true  },
+    { re: /^(DISTRITO)$/i,           campo: 'bairro',    seguinte: true  },
+    { re: /^(SETOR)$/i,              campo: 'bairro',    seguinte: true  },
+    { re: /^(QUADRA|QD\.?)$/i,       campo: 'complemento', seguinte: true },
+    { re: /^(CONJ\.?|CONJUNTO)$/i,   campo: 'complemento', seguinte: true },
+    { re: /^(APTO?\.?|AP\.?)$/i,     campo: 'complemento', seguinte: true },
+    { re: /^(BLOCO?|BL\.?)$/i,       campo: 'complemento', seguinte: true },
+    { re: /^(N[°ºo]?\.?|NRO\.?|NUMERO)$/i, campo: 'numero', seguinte: true },
+  ];
+
+  // Detecta se alguma parte é logradouro e absorve a(s) próxima(s) como valor
+  const partes = linha.split(/\s+/).filter(Boolean);
+  let nomeParts=[], numericParts=[];
+  let i = 0;
+  while (i < partes.length) {
+    const p = partes[i];
+    if (/^\d+$/.test(p)) {
+      numericParts.push(p);
+      i++;
+      continue;
+    }
+    // Verifica trigger de endereço
+    const trigger = ADDR_TRIGGERS.find(t => t.re.test(p));
+    if (trigger) {
+      // Absorve as próximas palavras não-numéricas como nome do logradouro/bairro
+      const partesCampo = [p];
+      i++;
+      while (i < partes.length && !/^\d+$/.test(partes[i])) {
+        // Para se chegar em outro trigger de endereço
+        if (ADDR_TRIGGERS.some(t => t.re.test(partes[i]))) break;
+        partesCampo.push(partes[i]);
+        i++;
+      }
+      const valorAtual = rec[trigger.campo];
+      const novoValor = partesCampo.join(' ');
+      if (!valorAtual) rec[trigger.campo] = novoValor;
+      else rec[trigger.campo] += ' ' + novoValor;
+      continue;
+    }
+    // Palavra comum → vai pro nome
+    if (p.length > 1) nomeParts.push(p);
+    i++;
+  }
+
+  // 4) Nome — se ainda não veio de rótulo
+  if (!rec.nome) rec.nome = nomeParts.join(' ');
+
+  // 5) Processamento dos números
+  const numStr = numericParts.join('');
+  if (numStr.length >= 10) {
+    const { tels, sobra } = extrairTelsBR(numStr);
+    for (let t of tels) {
+      if (t.tipo==='celular') rec.celulares.push(formatarTel(t.num));
+      else rec.fixos.push(formatarTel(t.num));
+    }
+    // Tenta identificar CPF/CNPJ/CEP no que sobrou
+    if (sobra.length > 0) identificarDocNums(sobra, rec);
+  } else if (numStr.length > 0) {
+    identificarDocNums(numStr, rec);
+  }
+
+  return rec;
+}
+
+// ─── Descobre quais colunas têm ao menos 1 valor preenchido ──────────────────
+function colunasAtivas(dados) {
+  return COLUNAS.filter(col => {
+    if (col.multi) return dados.some(d => d[col.key] && d[col.key].length > 0);
+    return dados.some(d => d[col.key] && d[col.key] !== '');
+  });
+}
+
+// ─── Expande colunas multi (Celular 1, Celular 2...) ─────────────────────────
+function expandirHeaders(cols, dados) {
+  const headers = [];
+  for (let col of cols) {
+    if (col.multi) {
+      const max = Math.max(...dados.map(d => (d[col.key]||[]).length), 1);
+      for (let i=1; i<=max; i++) headers.push({ label: max>1 ? `${col.label} ${i}` : col.label, key:col.key, idx:i-1 });
+    } else {
+      headers.push({ label:col.label, key:col.key, idx:null });
+    }
+  }
+  return headers;
+}
+
+function getCelVal(d, h) {
+  if (h.idx !== null) return (d[h.key]||[])[h.idx] || '';
+  return d[h.key] || '';
+}
+
+// ─── Tag colorida por tipo de coluna ─────────────────────────────────────────
+function tagClass(key) {
+  if (['celulares','whatsapp'].includes(key)) return 'tag-cel';
+  if (key==='fixos') return 'tag-fix';
+  if (['cpf','cnpj','rg','cnh','ctps','pis','nit','matricula','docNum','passaporte','tituloEleitor'].includes(key)) return 'tag-doc';
+  if (key==='uf') return 'tag-uf';
+  if (['emails','site'].includes(key)) return 'tag-email';
+  if (['valor','preco','total','subtotal','desconto','frete','juros','salario'].includes(key)) return 'tag-fin';
+  return 'tag-gen';
+}
+
+// ─── Processa ────────────────────────────────────────────────────────────────
+function processar() {
+  const linhas = input.value.split('\n').filter(l=>l.trim());
+  if (!linhas.length) { showToast('Cole pelo menos uma linha!'); return; }
+
+  dadosFinais = linhas.map(parseLinha).filter(Boolean);
+
+  const totalCel = dadosFinais.reduce((a,d)=>a+d.celulares.length,0);
+  const totalFix = dadosFinais.reduce((a,d)=>a+d.fixos.length,0);
+  const totalUF  = dadosFinais.filter(d=>d.uf).length;
+
+  document.getElementById('sLinhas').textContent    = dadosFinais.length;
+  document.getElementById('sCelulares').textContent = totalCel;
+  document.getElementById('sFixos').textContent     = totalFix;
+  document.getElementById('sUFs').textContent       = totalUF;
+  document.getElementById('statsBar').classList.add('visible');
+  document.getElementById('legend').classList.add('visible');
+
+  const ativas  = colunasAtivas(dadosFinais);
+  const headers = expandirHeaders(ativas, dadosFinais);
+
+  const previewDados = dadosFinais.slice(0, PREVIEW_LIMIT);
+  const restante = dadosFinais.length - previewDados.length;
+
+  // Monta cabeçalho
+  let th = `<th>#</th>` + headers.map(h=>`<th>${h.label}</th>`).join('');
+
+  // Monta linhas (apenas preview)
+  const rows = previewDados.map((d,i) => {
+    const cells = headers.map(h => {
+      const val = getCelVal(d,h);
+      const cls = tagClass(h.key);
+      return `<td>${val ? `<span class="tag ${cls}">${val}</span>` : '<span class="tag-empty">—</span>'}</td>`;
+    }).join('');
+    return `<tr><td class="td-num">${i+1}</td>${cells}</tr>`;
+  }).join('');
+
+  const aviso = restante > 0
+    ? `<div class="preview-notice">👁️ Exibindo <strong>${previewDados.length}</strong> de <strong>${dadosFinais.length}</strong> registros — baixe o arquivo para ver todos.</div>`
+    : '';
+
+  document.getElementById('resultArea').innerHTML = `
+    <div class="section-label" style="margin-top:8px">Resultado — ${dadosFinais.length} registros · ${ativas.length} campos detectados</div>
+    ${aviso}
+    <div class="table-wrap" id="tableWrap">
+      <table>
+        <thead><tr>${th}</tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+
+  setTimeout(()=>document.getElementById('tableWrap').classList.add('visible'),50);
+  document.getElementById('btnCSV').style.display  = 'inline-flex';
+  document.getElementById('btnXLSX').style.display = 'inline-flex';
+  showToast(`${dadosFinais.length} registros · ${ativas.length} colunas`);
+}
+
+// ─── Limpar ───────────────────────────────────────────────────────────────────
+function limpar() {
+  input.value='';
+  dadosFinais=[];
+  document.getElementById('charCount').textContent='0 linhas';
+  document.getElementById('resultArea').innerHTML='';
+  document.getElementById('statsBar').classList.remove('visible');
+  document.getElementById('legend').classList.remove('visible');
+  document.getElementById('btnCSV').style.display='none';
+  document.getElementById('btnXLSX').style.display='none';
+}
+
+// ─── Gera matriz para CSV/XLSX ────────────────────────────────────────────────
+function getExportData() {
+  const ativas  = colunasAtivas(dadosFinais);
+  const headers = expandirHeaders(ativas, dadosFinais);
+  const header  = headers.map(h=>h.label);
+  const rows    = dadosFinais.map(d => headers.map(h => getCelVal(d,h)));
+  return { header, rows };
+}
+
+function baixarCSV() {
+  if (!dadosFinais.length) return;
+  const { header, rows } = getExportData();
+  let csv = '\uFEFF' + header.join(';') + '\n';
+  for (let row of rows)
+    csv += row.map(v=>`"${(v||'').replace(/"/g,'""')}"`).join(';') + '\n';
+  download(new Blob([csv],{type:'text/csv;charset=utf-8;'}), 'dados_separados.csv');
+  showToast('CSV baixado!');
+}
+
+function baixarXLSX() {
+  if (!dadosFinais.length) return;
+  const { header, rows } = getExportData();
+  const escXML = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const allRows = [header, ...rows];
+  let sheetXML = `<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>`;
+  allRows.forEach((row,ri) => {
+    sheetXML += `<row r="${ri+1}">`;
+    row.forEach((cell,ci) => {
+      const col = ci < 26 ? String.fromCharCode(65+ci) : String.fromCharCode(64+Math.floor(ci/26))+String.fromCharCode(65+(ci%26));
+      sheetXML += `<c r="${col}${ri+1}" t="inlineStr"><is><t>${escXML(cell||'')}</t></is></c>`;
+    });
+    sheetXML += `</row>`;
+  });
+  sheetXML += `</sheetData></worksheet>`;
+
+  const wbXML=`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Dados" sheetId="1" r:id="rId1"/></sheets></workbook>`;
+  const relsXML=`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`;
+  const pkgRels=`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+  const ct=`<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`;
+
+  if (typeof JSZip !== 'undefined') {
+    const zip = new JSZip();
+    zip.file('[Content_Types].xml', ct);
+    zip.folder('_rels').file('.rels', pkgRels);
+    zip.folder('xl').file('workbook.xml', wbXML);
+    zip.folder('xl/_rels').file('workbook.xml.rels', relsXML);
+    zip.folder('xl/worksheets').file('sheet1.xml', sheetXML);
+    zip.generateAsync({type:'blob'}).then(blob => { download(blob,'dados_separados.xlsx'); showToast('XLSX baixado!'); });
+  } else { baixarCSV(); }
+}
+
+const script = document.createElement('script');
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+document.head.appendChild(script);
+
+function download(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key==='Enter') processar();
+});
+</script>
+</body>
+</html>
