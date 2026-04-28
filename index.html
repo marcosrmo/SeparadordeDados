@@ -75,6 +75,13 @@ JOAO PEDRO ALVES 99812 08332456789183987654321 PB"></textarea>
     <div class="input-footer">
       <span class="char-count" id="charCount">0 linhas</span>
       <div class="btn-group">
+        <input type="file" id="fileInput" accept=".csv,.xls,.xlsx,.doc,.docx,.pdf,.txt" style="display:none" multiple>
+        <button class="btn-ghost" id="btnImport" onclick="document.getElementById('fileInput').click()" title="Importar CSV, XLS, XLSX, DOC, DOCX, PDF ou TXT">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1v8M3 5l4-4 4 4M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Importar arquivo
+        </button>
         <button class="btn-ghost" onclick="limpar()">Limpar</button>
         <button class="btn-secondary" id="btnCSV" onclick="baixarCSV()" style="display:none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -145,6 +152,7 @@ JOAO PEDRO ALVES 99812 08332456789183987654321 PB"></textarea>
 <script src="src/js/parser.js"></script>
 <script src="src/js/table.js"></script>
 <script src="src/js/exporter.js"></script>
+<script src="src/js/fileLoader.js"></script>
 <script src="src/js/ui.js"></script>
 <script src="src/js/main.js"></script>
 </body>

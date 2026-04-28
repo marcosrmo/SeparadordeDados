@@ -4,12 +4,30 @@ Ferramenta web para extração e separação automática de dados brasileiros a 
 
 ## O que faz
 
-Cola linhas brutas (listas de leads, planilhas, documentos) e extrai automaticamente:
+Aceita texto colado **ou** upload de arquivos (`.csv`, `.xls`, `.xlsx`,
+`.docx`, `.pdf`, `.txt`) e extrai automaticamente:
 - Nomes
 - Celulares e fixos (com validação de DDD por estado)
 - CPF, CNPJ, RG e outros documentos
 - UF (estado)
 - Emails, endereços e dezenas de outros campos
+
+### Upload de arquivos
+
+Botão **"Importar arquivo"** na barra do input. Suporta:
+- `.csv` e `.txt` — leitura direta (CSV via SheetJS para tratar aspas/separadores)
+- `.xls` / `.xlsx` — todas as abas, via SheetJS (carregado da CDN sob demanda)
+- `.docx` — via Mammoth.js (CDN sob demanda)
+- `.pdf` — via PDF.js (CDN sob demanda); mantém ordem por linha (Y/X)
+- `.doc` (Word 97-2003 binário): mensagem orientando converter para .docx/.pdf
+
+Quando o arquivo for planilha **com cabeçalho** (primeira linha = títulos
+curtos sem números), o loader gera linhas no formato rotulado
+(`Nome: ... Telefone: ... Endereço: ...`), que o parser aproveita melhor
+para preservar valores com várias palavras (ex: "Joao da Silva", "Rio de
+Janeiro").
+
+Drag & drop direto no `<textarea>` também é suportado.
 
 ### Regras de classificação de endereço
 

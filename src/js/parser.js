@@ -86,17 +86,59 @@ function parseLinha(linha) {
   COLUNAS.forEach(c => { rec[c.key] = c.multi ? [] : ''; });
 
   // 1) Formato rotulado: CAMPO: valor CAMPO2: valor2 ...
-  const rotulado = /\b([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30})\s*[:=]\s*([^\s:][^:]*?)(?=\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30}\s*[:=]|$)/g;
-  let matchRot;
-  const linhaCopia = linha;
-  while ((matchRot = rotulado.exec(linhaCopia)) !== null) {
-    const chaveRaw = normChave(matchRot[1]);
-    const val = matchRot[2].trim();
-    const campo = SINONIMOS[chaveRaw];
-    if (campo) {
-      if (Array.isArray(rec[campo])) rec[campo].push(val);
-      else rec[campo] = val;
-      linha = linha.replace(matchRot[0], ' ');
+  //    Procura todas as posições "PALAVRA(S):" e valida se a chave é
+  //    um sinônimo conhecido. O valor de cada label vai até o início do
+  //    próximo label conhecido (ou fim da linha), permitindo valores
+  //    com várias palavras.
+  {
+    const labelRe = /\b([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ ]{0,30})\s*[:=]/g;
+    const labels = [];
+    let m;
+    while ((m = labelRe.exec(linha)) !== null) {
+      // Tenta a chave com todas as palavras; se não bater, vai removendo
+      // palavras do início (ex: "Joao Silva Nome" → "Silva Nome" → "Nome")
+      const palavras = m[1].trim().split(/\s+/);
+      let achouCampo = null;
+      let inicioPalavra = 0;
+      for (let k = 0; k < palavras.length; k++) {
+        const tentativa = palavras.slice(k).join(' ');
+        const campo = SINONIMOS[normChave(tentativa)];
+        if (campo) {
+          achouCampo = campo;
+          inicioPalavra = k;
+          break;
+        }
+      }
+      if (achouCampo) {
+        // Recalcula o índice de início real do label dentro da linha
+        let labelStart = m.index;
+        if (inicioPalavra > 0) {
+          // Pula as primeiras `inicioPalavra` palavras consumidas pelo regex
+          const consumido = palavras.slice(0, inicioPalavra).join(' ');
+          labelStart = m.index + consumido.length;
+          // pula espaços
+          while (labelStart < linha.length && /\s/.test(linha[labelStart])) labelStart++;
+        }
+        labels.push({
+          campo: achouCampo,
+          labelStart,
+          valStart: m.index + m[0].length,
+        });
+      }
+    }
+    if (labels.length > 0) {
+      for (let li = 0; li < labels.length; li++) {
+        const cur = labels[li];
+        const nxt = labels[li + 1];
+        const val = linha.slice(cur.valStart, nxt ? nxt.labelStart : linha.length)
+                         .trim()
+                         .replace(/\s+/g, ' ');
+        if (!val) continue;
+        if (Array.isArray(rec[cur.campo])) rec[cur.campo].push(val);
+        else rec[cur.campo] = val;
+      }
+      // Remove tudo a partir do primeiro label conhecido (já consumido)
+      linha = linha.slice(0, labels[0].labelStart).trim();
     }
   }
 
@@ -132,10 +174,10 @@ function parseLinha(linha) {
         const next = partes[i];
         // Outro gatilho de endereço encerra o segmento atual
         if (ADDR_TRIGGERS.some(t => t.re.test(next))) break;
-        // Número longo (8+ dígitos) provavelmente é CEP/CPF/CNPJ/telefone — para
+        // Sequências que parecem CEP/CPF/CNPJ/telefone encerram o endereço.
+        // Considera-se a contagem total de dígitos (ignora hífens, parênteses).
         const apenasDig = next.replace(/\D/g, '');
-        if (/^\d+$/.test(next) && next.length >= 8) break;
-        if (apenasDig.length >= 10) break;
+        if (apenasDig.length >= 8) break;
         // Caso contrário (palavra ou número curto = nº da casa), absorve no endereço
         partesCampo.push(next);
         i++;
@@ -178,7 +220,8 @@ function validarReclassificar(rec) {
   let nome = rec.nome;
 
   // 5.1) Telefones que vazaram pro nome (formatos comuns ou 10-11 dígitos seguidos)
-  const telRe = /\(?\d{2}\)?[\s.-]*9?\d{4}[\s.-]*\d{4}|\b\d{10,11}\b/g;
+  //      Aceita: (DD) 99999-9999 / (DD)9999-9999 / DD 99999-9999 / 11 dígitos puros.
+  const telRe = /\(\s*\d{2}\s*\)\s*9?\d{4}[\s.-]?\d{4}|\b\d{10,11}\b/g;
   nome = nome.replace(telRe, (m) => {
     const dig = m.replace(/\D/g, '');
     if (dig.length === 11 && dig[2] === '9' && isDddValido(Number(dig.slice(0, 2)))) {
