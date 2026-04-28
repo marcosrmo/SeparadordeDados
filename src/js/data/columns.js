@@ -61,16 +61,9 @@ const COLUNAS = [
   { key:'hora',           label:'Hora' },
   { key:'horario',        label:'Horário' },
 
-  // Endereço
+  // Endereço (coluna única — rua/av/alameda/travessa/estrada/rodovia/
+  // número/complemento são todos consolidados aqui)
   { key:'endereco',       label:'Endereço' },
-  { key:'rua',            label:'Rua' },
-  { key:'avenida',        label:'Avenida' },
-  { key:'alameda',        label:'Alameda' },
-  { key:'travessa',       label:'Travessa' },
-  { key:'estrada',        label:'Estrada' },
-  { key:'rodovia',        label:'Rodovia' },
-  { key:'numero',         label:'Número' },
-  { key:'complemento',    label:'Complemento' },
   { key:'bairro',         label:'Bairro' },
   { key:'distrito',       label:'Distrito' },
   { key:'setor',          label:'Setor' },
