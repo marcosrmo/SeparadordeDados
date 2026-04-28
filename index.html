@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Separador de Dados — Brasil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="icon" type="image/png" href="src/assets/logo.png">
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo-group">
+      <img src="src/assets/logo.png" alt="Separador de Dados BR" class="logo-img">
+      <div class="subtitle" style="margin-top:2px">Extrai nome, telefones, documento e UF — DDDs validados por estado</div>
+    </div>
+    <div class="badge-br">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="6.5" fill="#009c3b"/>
+        <path d="M7 2.5L12 7L7 11.5L2 7L7 2.5Z" fill="#FEDF00"/>
+        <circle cx="7" cy="7" r="2" fill="#002776"/>
+      </svg>
+      Formato brasileiro
+    </div>
+  </header>
+
+  <!-- ── Como funciona + O que extrai ───────────────────────────────────── -->
+  <div class="info-panel">
+
+    <div class="info-how">
+      <div class="info-how-title">Como funciona</div>
+      <div class="info-steps">
+        <div class="info-step">
+          <div class="info-step-num">1</div>
+          <div class="info-step-text"><strong>Cole o texto bruto</strong> — cada linha é um registro de uma pessoa ou empresa, em qualquer formato.</div>
+        </div>
+        <div class="info-step">
+          <div class="info-step-num">2</div>
+          <div class="info-step-text"><strong>Clique em "Separar dados"</strong> — cada campo é identificado automaticamente.</div>
+        </div>
+        <div class="info-step">
+          <div class="info-step-num">3</div>
+          <div class="info-step-text"><strong>Exporte CSV ou XLSX</strong> — cada campo vira uma coluna, pronta para qualquer planilha ou CRM.</div>
+        </div>
+      </div>
+      <div class="info-formats">
+        <span class="info-formats-label">Aceita</span>
+        <span class="info-fmt-tag"><span>Rotulado:</span> CPF: 123 Nome: João Tel: 11999...</span>
+        <span class="info-fmt-tag"><span>Bruto:</span> JOÃO SILVA 11999887766 12345678900 SP</span>
+        <span class="info-fmt-tag"><span>Misto:</span> ambos na mesma linha</span>
+      </div>
+    </div>
+
+  </div>
+  <!-- ──────────────────────────────────────────────────────────────────────── -->
+
+  <div class="section-label">Dados de entrada</div>
+  <div class="input-card">
+    <div class="input-header">
+      <div class="input-header-left">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <span style="font-size:12px;color:var(--text3)">linhas_brutas.txt</span>
+    </div>
+    <textarea id="input"
+      placeholder="Cole suas linhas aqui — cada linha = uma pessoa ou empresa
+Exemplo:
+HENRIQUE CANDIDO RIBEIRO DE MARAIS 86594 0003363349800099794909 PB
+MARIA APARECIDA SOUZA 12345 01198765432100112223334 SP
+JOAO PEDRO ALVES 99812 08332456789183987654321 PB"></textarea>
+    <div class="input-footer">
+      <span class="char-count" id="charCount">0 linhas</span>
+      <div class="btn-group">
+        <button class="btn-ghost" onclick="limpar()">Limpar</button>
+        <button class="btn-secondary" id="btnCSV" onclick="baixarCSV()" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 11h10M7 2v7M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Baixar CSV
+        </button>
+        <button class="btn-secondary" id="btnXLSX" onclick="baixarXLSX()" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M5 5l4 4M9 5l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Baixar XLSX
+        </button>
+        <button class="btn-primary" onclick="processar()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Separar dados
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n green" id="sLinhas">0</div>
+        <div class="stat-pill-l">linhas processadas</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n blue" id="sCelulares">0</div>
+        <div class="stat-pill-l">celulares encontrados</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n orange" id="sFixos">0</div>
+        <div class="stat-pill-l">fixos encontrados</div>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <div>
+        <div class="stat-pill-n" style="color:var(--uf)" id="sUFs">0</div>
+        <div class="stat-pill-l">com estado (UF)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend" id="legend">
+    <div class="leg-item"><div class="leg-dot nome"></div> Nome</div>
+    <div class="leg-item"><div class="leg-dot cel"></div> Celular</div>
+    <div class="leg-item"><div class="leg-dot fix"></div> Fixo</div>
+    <div class="leg-item"><div class="leg-dot doc"></div> Número doc</div>
+    <div class="leg-item"><div class="leg-dot uf"></div> Estado (UF)</div>
+  </div>
+
+  <div id="resultArea"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="src/js/data/columns.js"></script>
+<script src="src/js/data/synonyms.js"></script>
+<script src="src/js/data/ddd.js"></script>
+<script src="src/js/parser.js"></script>
+<script src="src/js/table.js"></script>
+<script src="src/js/exporter.js"></script>
+<script src="src/js/ui.js"></script>
+<script src="src/js/main.js"></script>
+</body>
+</html>

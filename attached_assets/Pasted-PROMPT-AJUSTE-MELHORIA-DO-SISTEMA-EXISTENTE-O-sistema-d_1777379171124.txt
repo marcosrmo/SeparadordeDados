@@ -1,0 +1,51 @@
+PROMPT (AJUSTE / MELHORIA DO SISTEMA EXISTENTE):
+
+O sistema de normalização de dados já está funcional, porém apresenta erros na classificação e separação dos campos. Implemente melhorias na lógica atual sem alterar a estrutura principal do aplicativo.
+
+Objetivo: aumentar a precisão na separação dos dados em colunas para geração de planilhas (Excel/CSV), garantindo que cada informação seja corretamente alocada.
+
+Problemas atuais a corrigir:
+
+Endereços estão sendo fragmentados em múltiplas colunas (rua, avenida, logradouro, etc.)
+Partes do endereço estão sendo misturadas com o nome
+Telefones às vezes são interpretados como parte de outros campos
+Dados estão sendo classificados em colunas incorretas
+
+Regras de melhoria:
+
+Unificação do endereço (PRIORIDADE MÁXIMA)
+Todos os elementos relacionados a endereço devem ser consolidados em uma única coluna chamada "endereço".
+O sistema não deve criar colunas separadas para:
+rua / r.
+avenida / av.
+travessa / tr.
+logradouro
+rodovia / estrada
+
+Todos esses termos são apenas variações e devem compor um único campo textual contínuo.
+
+Correção de classificação (revalidação)
+Após a separação inicial, implementar uma etapa de validação que:
+Detecta inconsistências (ex: número de telefone dentro do nome)
+Reclassifica os dados para a coluna correta
+Isolamento de campos
+Nome: apenas texto, sem números relevantes ou termos de endereço
+Telefone: apenas números válidos (10 ou 11 dígitos)
+Endereço: pode conter números, mas deve ter palavras-chave de localização
+CEP: padrão numérico de 8 dígitos
+Cidade e UF: separados corretamente
+Reconhecimento por contexto (heurística)
+Quando houver ambiguidade:
+Presença de palavras como "Rua", "Av", "Travessa" → classificar como endereço
+Sequência numérica longa (10–11 dígitos) → telefone
+Padrão XXXXX-XXX ou 8 dígitos → CEP
+Regras de prioridade
+Se um dado puder pertencer a mais de um campo:
+Priorizar telefone quando for número válido de telefone
+Priorizar endereço quando houver palavra-chave de localização
+Nunca permitir que endereço ou telefone permaneçam no campo nome
+Saída final (mantida)
+Estrutura em colunas:
+Nome | Telefone | Endereço | CEP | Cidade | UF
+
+Cada linha deve representar um registro limpo, pronto para exportação em Excel.
